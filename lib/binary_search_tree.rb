@@ -20,7 +20,7 @@ class BinarySearchTree
 
   def find(value, tree_node = @root)
     return tree_node if tree_node.value == value
-    
+
     if value <= tree_node.value 
       node = find(value, tree_node.left) if tree_node.left
     end 
@@ -33,6 +33,8 @@ class BinarySearchTree
   end
 
   def delete(value)
+    node = find(value)
+
   end
 
   # helper method for #delete:
@@ -56,12 +58,14 @@ class BinarySearchTree
     if node.value <= tree_node.value 
       if tree_node.left.nil?
         tree_node.left = node
+        node.parent = tree_node
         return 
       end 
       insert_node(node, tree_node.left)
     else 
       if tree_node.right.nil? 
         tree_node.right = node
+        node.parent = tree_node
         return 
       end 
       insert_node(node, tree_node.right)
