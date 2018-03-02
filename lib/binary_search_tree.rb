@@ -1,11 +1,21 @@
 # There are many ways to implement these methods, feel free to add arguments 
 # to methods as you see fit, or to create helper methods.
+require_relative 'bst_node'
 
 class BinarySearchTree
+  attr_accessor :root
+  
   def initialize
+    @root = nil
   end
 
   def insert(value)
+    node = BSTNode.new(value)
+    if !@root 
+      @root = node 
+    else 
+      insert_node(node)
+    end 
   end
 
   def find(value, tree_node = @root)
@@ -31,4 +41,20 @@ class BinarySearchTree
   private
   # optional helper methods go here:
 
+  def insert_node(node, tree_node = @root)
+    if node.value <= tree_node.value 
+      if tree_node.left.nil?
+        tree_node.left = node
+        return 
+      end 
+      insert_node(node, tree_node.left)
+    else 
+      if tree_node.right.nil? 
+        tree_node.right = node
+        return 
+      end 
+      insert_node(node, tree_node.right)
+    end 
+
+  end 
 end
