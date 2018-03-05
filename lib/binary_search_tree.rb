@@ -1,5 +1,6 @@
 # There are many ways to implement these methods, feel free to add arguments 
 # to methods as you see fit, or to create helper methods.
+require 'byebug'
 require_relative 'bst_node'
 
 class BinarySearchTree
@@ -34,11 +35,30 @@ class BinarySearchTree
 
   def delete(value)
     node = find(value)
+    if node.left.nil? && node.right.nil?
+      @root == node ? @root = nil : replace_node(node)
+    elsif [node.left, node.right].compact.length == 1
+      child_node = [node.left, node.right].compact.first
+      replace_node(node, child_node)
+    elsif node.left && node.right
+      max = maximum(node.left)
+      replace_node(node, max)
+      max_child = max.left
+      if max_child 
+        max_child = max.left
+        max_child.parent = node.left
+        node.left.right = max_child
+      end 
+      max.left = node.left
+      node.left.parent = max
 
+    end 
   end
 
   # helper method for #delete:
   def maximum(tree_node = @root)
+    return tree_node if tree_node.right.nil?
+    maximum(tree_node.right)
   end
 
   def depth(tree_node = @root)
@@ -71,5 +91,14 @@ class BinarySearchTree
       insert_node(node, tree_node.right)
     end 
 
+  end
+
+  def replace_node(node, replacement = nil)
+    if node.value <= node.parent.value
+      node.parent.left = replacement
+    else 
+      node.parent.right = replacement
+    end 
   end 
+  
 end
