@@ -62,6 +62,20 @@ class BinarySearchTree
   end
 
   def depth(tree_node = @root)
+    result = 0
+    row = [tree_node]
+    until row.empty?
+      temp_row = []
+      until row.empty?
+        temp_row << row.shift
+      end 
+      until temp_row.empty?
+        node = temp_row.shift
+        [node.left, node.right].each { |node| row << node if node }
+      end 
+      result += 1
+    end 
+    result - 1
   end 
 
   def is_balanced?(tree_node = @root)
