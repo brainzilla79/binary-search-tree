@@ -6,8 +6,8 @@ require_relative 'bst_node'
 class BinarySearchTree
   attr_accessor :root
   
-  def initialize
-    @root = nil
+  def initialize(root = nil)
+    @root = root
   end
 
   def insert(value)
