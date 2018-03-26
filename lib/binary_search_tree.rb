@@ -62,7 +62,7 @@ class BinarySearchTree
   end
 
   def depth(tree_node = @root)
-    get_total_depth(tree_node) - 1
+    get_height(tree_node) - 1
   end 
 
   def is_balanced?(tree_node = @root)
@@ -118,9 +118,9 @@ class BinarySearchTree
     end 
   end 
 
-  def get_total_depth(tree_node)
+  def get_height(tree_node)
     return 0 if tree_node.nil?
-    [get_total_depth(tree_node.left), get_total_depth(tree_node.right)].max + 1
+    [get_height(tree_node.left), get_height(tree_node.right)].max + 1
   end 
   
 end
