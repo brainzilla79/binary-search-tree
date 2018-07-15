@@ -155,4 +155,11 @@ describe BinarySearchTree do
       expect(prefilled_bst.in_order_traversal).to eq(in_order_array)
     end
   end
+
+  describe '#preorder_traversal' do 
+    it 'visits itself then its left children, then its right children' do 
+      preorder_array = [5,3,1,0,2,1.5,4,7,9,10]
+      expect(prefilled_bst.preorder_traversal).to eq(preorder_array)
+    end 
+  end 
 end

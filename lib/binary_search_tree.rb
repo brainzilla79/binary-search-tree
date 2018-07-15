@@ -79,7 +79,6 @@ class BinarySearchTree
   def in_order_traversal(tree_node = @root, arr = [])
     if tree_node
       in_order_traversal(tree_node.left, arr)
-
       arr << tree_node.value
 
       in_order_traversal(tree_node.right, arr)
@@ -87,6 +86,14 @@ class BinarySearchTree
     arr
   end
 
+  def preorder_traversal(tree_node = @root, arr = [])
+    if tree_node
+      arr << tree_node.value
+      preorder_traversal(tree_node.left, arr)
+      preorder_traversal(tree_node.right, arr)
+    end 
+    arr
+  end 
 
   private
   # optional helper methods go here:
